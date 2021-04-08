@@ -9,7 +9,7 @@ import random
 import pickle
 
 music_list_file = 'music_list.pickle' # list with music
-curr_pos_file = 'current_play_idx.pickle'
+curr_pos_file = 'current_play_idx.pickle' # current index in list, just a text file
 delay = 5 # delay between tracks in seconds
 
 ### Read the list of music tracks or create one
@@ -70,10 +70,11 @@ for current_index in range(last_used_idx,len(music_list)):
         process = subprocess.Popen(command_line,
                              stdout=subprocess.PIPE, 
                              stderr=subprocess.PIPE)
-        # This string is required to wait to end of the track: 
+        # This string is required to wait the end of the current track played: 
         stdout, stderr = process.communicate()
         ## TO_DO: read info from stdout and make a progress bar: 
         ## https://stackoverflow.com/questions/375427/a-non-blocking-read-on-a-subprocess-pipe-in-python
+        
         # Delay before the next track and allow to break sequence (index saved!)
         with Progress(transient=True) as progress:
             # beautiful progress bar
